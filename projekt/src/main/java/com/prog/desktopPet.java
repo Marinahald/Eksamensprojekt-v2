@@ -30,7 +30,7 @@ public class desktopPet extends JFrame{
         setSize(260, 260);
 		setLocation(650, 350);
         
-        mouseListener ml = new mouseListener(this);
+        //mouseListener ml = new mouseListener(this);
 
       c.add(back);
       
@@ -72,15 +72,16 @@ public class desktopPet extends JFrame{
 		
 		
 	}
-    /* 
+    
     public static void mouseListener(JFrame frame) {
         frame.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void MOUSE_DRAGGED(java.awt.event.MouseEvent evt) {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
                 System.out.println("Mouse clicked");
+                frame.setLocation(evt.getXOnScreen(), evt.getYOnScreen());
             }
         });
         
     }
-    */
+    
 
 }
