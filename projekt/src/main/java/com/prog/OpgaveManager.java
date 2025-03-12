@@ -7,6 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +22,7 @@ import org.json.JSONObject;
 
 public class OpgaveManager {
     private static final String FILE_PATH = "opgaver.json";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
         public static void main(String[] args) {
             JFrame frame = new JFrame("Opgave Manager");
@@ -38,10 +42,13 @@ public class OpgaveManager {
                 String navn = navnField.getText();
                 String dato = datoField.getText();
                 int elevTid = Integer.parseInt(elevTidField.getText());
+                try {
+                Date parsedDate = DATE_FORMAT.parse(dato);
+                String formattedDate = DATE_FORMAT.format(parsedDate);
 
                 JSONObject nyOpgave = new JSONObject();
                 nyOpgave.put("navn", navn);
-                nyOpgave.put("dato", dato);
+                nyOpgave.put("dato", formattedDate);
                 nyOpgave.put("elevTid", elevTid);
 
                 JSONArray opgaver = hentOpgaver();
@@ -49,6 +56,10 @@ public class OpgaveManager {
                 gemOpgaver(opgaver);
 
                 JOptionPane.showMessageDialog(frame, "Opgaven er gemt!");
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(frame, "Ugyldigt datoformat. Brug venligst DD-MM-YYYY.");
+            }
+            
             });
 
             frame.add(navnLabel);
