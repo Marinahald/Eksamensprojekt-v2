@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -23,13 +24,14 @@ public class desktopPet extends JFrame{
         setUndecorated(true);
 	    setBackground(new Color(0,0,0,0));
 
-        back = new BackgroundPanel(new ImageIcon("tempcat.png"));
-        //back.setBackground(new Color(0,0,0,0));
-        //back.setOpaque(false);
-
+        back = new BackgroundPanel(new ImageIcon("angycat.png"));
+        
+        back.setOpaque(false);
         setSize(260, 260);
 		setLocation(650, 350);
-       
+        
+        mouseListener ml = new mouseListener(this);
+
       c.add(back);
       
     }
@@ -40,7 +42,6 @@ public class desktopPet extends JFrame{
         
         
     }
-
    
 
     public class BackgroundPanel extends JPanel{
@@ -71,6 +72,15 @@ public class desktopPet extends JFrame{
 		
 		
 	}
-
+    /* 
+    public static void mouseListener(JFrame frame) {
+        frame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void MOUSE_DRAGGED(java.awt.event.MouseEvent evt) {
+                System.out.println("Mouse clicked");
+            }
+        });
+        
+    }
+    */
 
 }
