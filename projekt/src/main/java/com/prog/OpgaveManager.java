@@ -1,6 +1,5 @@
 package com.prog;
 
-
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileWriter;
@@ -32,7 +31,7 @@ public class OpgaveManager {
 
             JLabel navnLabel = new JLabel("Opgavens navn:");
             JTextField navnField = new JTextField();
-            JLabel datoLabel = new JLabel("Afleveringsdato (YYYY-MM-DD):");
+            JLabel datoLabel = new JLabel("Afleveringsdato (DD-MM-YYYY):");
             JTextField datoField = new JTextField();
             JLabel elevTidLabel = new JLabel("Estimeret elevtid (timer):");
             JTextField elevTidField = new JTextField();
@@ -80,7 +79,6 @@ public class OpgaveManager {
             String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
             return new JSONArray(content);
             } catch (IOException e) {
-            e.printStackTrace();
             return new JSONArray();
             }
         }
@@ -88,7 +86,6 @@ public class OpgaveManager {
             try (FileWriter file = new FileWriter(FILE_PATH)) {
                 file.write(opgaver.toString(4)); // Formateret JSON med indryk
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }

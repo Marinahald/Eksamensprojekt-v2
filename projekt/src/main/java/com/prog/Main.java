@@ -2,8 +2,6 @@ package com.prog;
 
 import javax.swing.ImageIcon;
 
-import org.json.JSONObject;
-
 public class Main{
 public static void main(String[] args) {    
       
@@ -12,7 +10,9 @@ public static void main(String[] args) {
         opgaveManager.main(args);
         desktopPet pet = new desktopPet();
         pet.setVisible(true);
-        //AssignmentReminder ar = new AssignmentReminder();
+        reader Reader = new reader();
+        Reader.main(args);
+
 
         pet.setIcon(new ImageIcon("angycat.png"));
 
