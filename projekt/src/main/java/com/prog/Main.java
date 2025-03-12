@@ -10,6 +10,7 @@ public static void main(String[] args) {
         //JSONObject nyOpgave = new JSONObject();
         OpgaveManager opgaveManager = new OpgaveManager();
         opgaveManager.main(args);
+
         desktopPet pet = new desktopPet();
         pet.setVisible(true);
         //AssignmentReminder ar = new AssignmentReminder();
