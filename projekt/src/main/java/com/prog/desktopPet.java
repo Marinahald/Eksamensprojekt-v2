@@ -25,7 +25,7 @@ public class desktopPet extends JFrame{
 
         back = new BackgroundPanel(new ImageIcon("tempcat.png"));
         //back.setBackground(new Color(0,0,0,0));
-        back.setOpaque(false);
+        //back.setOpaque(false);
 
         setSize(260, 260);
 		setLocation(650, 350);
@@ -54,9 +54,9 @@ public class desktopPet extends JFrame{
 			this.icon = icon;
             System.out.println("setIcon called with: " + icon + "v2");
             
-            repaint();
-           
+            repaint();   
 		}
+
         @Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
