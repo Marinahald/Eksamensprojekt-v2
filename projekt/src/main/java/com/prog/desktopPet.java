@@ -39,7 +39,7 @@ public class desktopPet extends JFrame{
         
         //mouseListener ml = new mouseListener(this);
         mouseListener(this);
-      c.add(back);
+        c.add(back);
       
     }
 
@@ -68,8 +68,6 @@ public class desktopPet extends JFrame{
         @Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
-            //g.setColor(new Color(0, 0, 0, 0));
-            //g.fillRect(0, 0, 260, 260);
 			if (this.icon != null) {
 				g.drawImage(icon.getImage(),0,0, getWidth(), getHeight(),this);
 			}
@@ -79,36 +77,26 @@ public class desktopPet extends JFrame{
 		
 		
 	}
-    /*
-    public static void mouseListener(JFrame frame) {
-        frame.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                System.out.println("Mouse clicked");
-                frame.setLocation(evt.getXOnScreen(), evt.getYOnScreen());
-            }
-        });
-        
-    }
-    */
+  
 
     public static void mouseListener(JFrame frame) {
         frame.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                ((desktopPet) frame).initialClick = e.getPoint();
+            public void mousePressed(MouseEvent m) {
+                ((desktopPet) frame).initialClick = m.getPoint();
                 frame.getComponentAt(((desktopPet) frame).initialClick);
             }
         });
 
         frame.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
+            //@Override
+            public void mouseDragged(MouseEvent m) {
                 // get location of Window
                 int thisX = frame.getLocation().x;
                 int thisY = frame.getLocation().y;
 
                 // Determine how much the mouse moved since the initial click
-                int xMoved = e.getX() - ((desktopPet) frame).initialClick.x;
-                int yMoved = e.getY() - ((desktopPet) frame).initialClick.y;
+                int xMoved = m.getX() - ((desktopPet) frame).initialClick.x;
+                int yMoved = m.getY() - ((desktopPet) frame).initialClick.y;
 
                 // Move window to this position
                 int X = thisX + xMoved;
