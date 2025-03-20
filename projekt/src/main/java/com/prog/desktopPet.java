@@ -31,7 +31,7 @@ public class desktopPet extends JFrame{
         setUndecorated(true);
 	    setBackground(new Color(0,0,0,0));
 
-        back = new BackgroundPanel(new ImageIcon("angycat.png"));
+        back = new BackgroundPanel(new ImageIcon("tempcat.png"));
         
         back.setOpaque(false);
         setSize(260, 260);
@@ -84,6 +84,16 @@ public class desktopPet extends JFrame{
             public void mousePressed(MouseEvent m) {
                 ((desktopPet) frame).initialClick = m.getPoint();
                 frame.getComponentAt(((desktopPet) frame).initialClick);
+            }
+        });
+
+        frame.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent m) {
+                //frame.getComponentAt(m.getPoint());
+                opgaveListe oL = new opgaveListe();
+                System.err.println("mousePressed");
+                oL.frame.setVisible(true);
+
             }
         });
 

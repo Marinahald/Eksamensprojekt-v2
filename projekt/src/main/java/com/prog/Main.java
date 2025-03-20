@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 public class Main{
 public static void main(String[] args) {    
       
-        //JSONObject nyOpgave = new JSONObject();
         OpgaveManager opgaveManager = new OpgaveManager();
         opgaveManager.main(args);
 
@@ -16,7 +15,7 @@ public static void main(String[] args) {
         Reader.main(args);
 
 
-        pet.setIcon(new ImageIcon("tempcat.png"));
+        pet.setIcon(new ImageIcon("angycat.png"));
         
     }
         

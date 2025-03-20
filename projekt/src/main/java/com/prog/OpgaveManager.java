@@ -25,7 +25,7 @@ public class OpgaveManager {
 
         public static void main(String[] args) {
             JFrame frame = new JFrame("Opgave Manager");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(400, 300);
             frame.setLayout(new GridLayout(4, 2));
 
