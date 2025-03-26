@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,6 +22,7 @@ public class opgaveListe {
         frame = new JFrame("Opgave List");
         frame.setSize(600, 400);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(null);
 
         // Create a table model with column names
         DefaultTableModel tableModel = new DefaultTableModel(new String[] { "Navn", "Dato", "Tid (timer)" }, 0);
@@ -44,11 +46,22 @@ public class opgaveListe {
         opgaveTable.setFont(new Font("Arial", Font.PLAIN, 16)); // Set font size
         opgaveTable.setRowHeight(25); // Set row height for better readability
 
-        JScrollPane scrollPane = new JScrollPane(opgaveTable);
+// Add the table to a scroll pane
+JScrollPane scrollPane = new JScrollPane(opgaveTable);
+scrollPane.setBounds(10, 10, 560, 300); // Set bounds for the scroll pane
+
+// Create and add the "Tilføj opgave" button
+JButton tilfoj = new JButton("Tilføj opgave");
+tilfoj.setBounds(10, 320, 150, 30); // Set proper bounds for the button
 
         frame.add(scrollPane);
+        frame.add(tilfoj);
         frame.setVisible(true);
+        tilfoj.addActionListener(e -> {
+            new OpgaveManager(); // Create a new instance of OpgaveManager
+        });
     }
+   
 
     private JSONArray hentOpgaver() throws IOException {
         File file = new File("opgaver.json");
@@ -56,4 +69,5 @@ public class opgaveListe {
         String content = new String(Files.readAllBytes(Paths.get("opgaver.json")));
         return new JSONArray(content);
     }
+    
 }
