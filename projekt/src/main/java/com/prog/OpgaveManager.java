@@ -1,5 +1,5 @@
 
-    package com.prog;
+package com.prog;
 
 import java.awt.GridLayout;
 import java.io.File;
@@ -21,22 +21,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class OpgaveManager {
+
     private static final String FILE_PATH = "opgaver.json";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
-    public OpgaveManager() {
+    public OpgaveManager(JSONObject opgave) {
         JFrame frame = new JFrame("Opgave Manager");
         frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new GridLayout(4, 2));
 
         JLabel navnLabel = new JLabel("Opgavens navn:");
-        JTextField navnField = new JTextField();
+        JTextField navnField = new JTextField(opgave != null ? opgave.optString("navn", "") : ""); //hvis der står noget i feltet skriver den det ellers skriver den ingenting ""
         JLabel datoLabel = new JLabel("Afleveringsdato (DD-MM-YYYY):");
-        JTextField datoField = new JTextField();
+        JTextField datoField = new JTextField(opgave != null ? opgave.optString("dato", "") : ""); //hvis der står noget i feltet skriver den det ellers skriver den ingenting ""
         JLabel elevTidLabel = new JLabel("Estimeret elevtid (timer):");
-        JTextField elevTidField = new JTextField();
-        JButton saveButton = new JButton("Gem Opgave");
+        JTextField elevTidField = new JTextField(opgave != null ? String.valueOf(opgave.optInt("elevTid", 0)) : ""); //hvis der står noget i feltet skriver den det ellers skriver den ingenting ""
+        JButton saveButton = new JButton(opgave != null ? "Opdater Opgave" : "Gem Opgave");
 
         saveButton.addActionListener(e -> {
             String navn = navnField.getText();
@@ -52,10 +53,25 @@ public class OpgaveManager {
                 nyOpgave.put("elevTid", elevTid);
 
                 JSONArray opgaver = hentOpgaver();
-                opgaver.put(nyOpgave);
+
+                if (opgave != null) {
+                    // Update existing opgave
+                    for (int i = 0; i < opgaver.length(); i++) {
+                        JSONObject existingOpgave = opgaver.getJSONObject(i);
+                        if (existingOpgave.optString("navn").equals(opgave.optString("navn"))) {
+                            opgaver.put(i, nyOpgave); //Opdatere feltet til det nye info
+                            break;
+                        }
+                    }
+                } else {
+                    // Add ny opgave
+                    opgaver.put(nyOpgave);
+                }
+
                 gemOpgaver(opgaver);
 
-                JOptionPane.showMessageDialog(frame, "Opgaven er gemt!");
+                JOptionPane.showMessageDialog(frame, opgave != null ? "Opgaven er opdateret!" : "Opgaven er gemt!");
+                frame.dispose();
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(frame, "Ugyldigt datoformat. Brug venligst DD-MM-YYYY.");
             } catch (NumberFormatException ex) {
@@ -78,7 +94,9 @@ public class OpgaveManager {
     private static JSONArray hentOpgaver() {
         try {
             File file = new File(FILE_PATH);
-            if (!file.exists()) return new JSONArray();
+            if (!file.exists()) {
+                return new JSONArray();
+            }
             String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
             return new JSONArray(content);
         } catch (IOException e) {
