@@ -10,10 +10,12 @@ public static void main(String[] args) {
         pet.setVisible(true);
 
         reader Reader = new reader();
-        Reader.main(args);
+        Reader.getMood();
 
 
         pet.setIcon(new ImageIcon("angycat.png"));
+
+        
         
     }
         

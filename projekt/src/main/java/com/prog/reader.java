@@ -17,7 +17,8 @@ public class reader {
     private static final String FILE_PATH = "opgaver.json";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
-    public static void main(String[] args) {
+
+    public reader() {
         try {
             JSONArray opgaver = hentOpgaver();
             JSONObject closestOpgave = findClosestOpgave(opgaver);
@@ -51,7 +52,45 @@ public class reader {
                 closestOpgave = opgave;
             }
         }
-
         return closestOpgave;
+    }
+
+    public void getMood() {
+        String cl = null;
+        LocalDateTime now = LocalDateTime.now();
+        System.err.println(now);
+        try {
+        JSONArray opgaver = hentOpgaver();
+        JSONObject closestOpgave = findClosestOpgave(opgaver);
+        
+        cl = closestOpgave.toString();
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        
+
+        String datoStr = (now.getDayOfMonth() + "-" + now.getMonthValue() + "-" + now.getYear());
+        System.err.println(datoStr);
+        System.err.println(cl);
+        
+
+        // JSONObject closestOpgave = findClosestOpgave(opgaver);
+       // LocalDateTime now = LocalDateTime.now();
+
+       
+
+        /*
+        int timeTillSend;
+
+        switch (timeTillSend) {
+            case value:
+                
+                break;
+        
+            default:
+                break;
+        }
+        */
     }
 }
