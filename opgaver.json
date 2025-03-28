@@ -1,17 +1,17 @@
 [
     {
         "elevTid": 2,
-        "dato": "03-03-2025",
+        "dato": "30-04-2025",
         "navn": "dansk"
     },
     {
         "elevTid": 1,
-        "dato": "01-03-2025",
+        "dato": "01-04-2025",
         "navn": "Engelsk"
     },
     {
         "elevTid": 3,
-        "dato": "20-04-2025",
+        "dato": "2-04-2025",
         "navn": "fysik"
     }
 ]

@@ -55,42 +55,51 @@ public class reader {
         return closestOpgave;
     }
 
-    public void getMood() {
+    public static String getMood() {
         String cl = null;
+        Date Dcl = null;
+        Date datenow = null;
         LocalDateTime now = LocalDateTime.now();
         System.err.println(now);
         try {
+        //henter opgaver fra fillen
         JSONArray opgaver = hentOpgaver();
         JSONObject closestOpgave = findClosestOpgave(opgaver);
         
-        cl = closestOpgave.toString();
+        //finder opgavens dato
+        cl = closestOpgave.getString("dato");
+        Dcl = DATE_FORMAT.parse(cl);
+        
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
-        
-
+        //dagens dato
         String datoStr = (now.getDayOfMonth() + "-" + now.getMonthValue() + "-" + now.getYear());
-        System.err.println(datoStr);
-        System.err.println(cl);
-        
-
-        // JSONObject closestOpgave = findClosestOpgave(opgaver);
-       // LocalDateTime now = LocalDateTime.now();
-
-       
-
-        /*
-        int timeTillSend;
-
-        switch (timeTillSend) {
-            case value:
-                
-                break;
-        
-            default:
-                break;
+        try {
+            datenow = DATE_FORMAT.parse(datoStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        */
+        System.err.println(datenow);
+        //System.err.println(datoStr);
+        System.err.println(Dcl);
+
+        //finder forskellen mellem datoerne
+        long diff = Dcl.getTime() - datenow.getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        System.err.println(diffDays);
+        int dif = (int) diffDays;
+        
+       if (dif > 10) {
+        return "glad";
+        } else if (dif > 3) {
+            return "neutral";
+        } else if (dif > 1) {
+            return "sur";
+       } else {
+           return "angy";
+       }
+                
     }
 }
