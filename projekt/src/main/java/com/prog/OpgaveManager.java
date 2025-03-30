@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class OpgaveManager {
+public class OpgaveManager implements opgaveState {
 
     private static final String FILE_PATH = "opgaver.json";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");

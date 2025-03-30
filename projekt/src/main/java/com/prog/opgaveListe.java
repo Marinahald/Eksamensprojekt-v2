@@ -16,14 +16,17 @@ import javax.swing.table.DefaultTableModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class opgaveListe {
+public class opgaveListe implements opgaveState {
     JFrame frame;
+    //opgaveFrame frame;
     private JSONArray opgaver; // Keep the JSON array in memory
     
+
+
     public opgaveListe() {
-        frame = new JFrame("Opgave List");
+        /*frame = new JFrame("Opgave List");
         frame.setSize(600, 400);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);*/
         frame.setLayout(null);
 
         // Create a table model with column names
@@ -100,7 +103,17 @@ public class opgaveListe {
         });
         
 
-        frame.setVisible(true);
+        //frame.setVisible(true);
+    }
+
+    @Override
+    public void updateState() {
+        frame.setVisible(true); // Show the frame when the state is updated
+    }
+
+    @Override
+    public void setOpgaveState(opgaveState State) {
+        this.frame = frame; // Set the frame to the current state
     }
 
     private JSONArray hentOpgaver() throws IOException {
