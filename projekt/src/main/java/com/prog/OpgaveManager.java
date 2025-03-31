@@ -15,21 +15,26 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class OpgaveManager {
+public class OpgaveManager implements opgaverVeiw {
 
-    private static final String FILE_PATH = "opgaver.json";
+    private JSONObject opgave;
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
     public OpgaveManager(JSONObject opgave) {
-        JFrame frame = new JFrame("Opgave Manager");
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLayout(new GridLayout(4, 2));
+        this.opgave = opgave;
+    }
+
+    @Override
+    public JPanel getVeiw(OpgaveFrame frame) {
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setLayout(new GridLayout(4, 2));
 
         JLabel navnLabel = new JLabel("Opgavens navn:");
         JTextField navnField = new JTextField(opgave != null ? opgave.optString("navn", "") : ""); //hvis der står noget i feltet skriver den det ellers skriver den ingenting ""
@@ -52,7 +57,13 @@ public class OpgaveManager {
                 nyOpgave.put("dato", formattedDate);
                 nyOpgave.put("elevTid", elevTid);
 
-                JSONArray opgaver = hentOpgaver();
+                JSONArray opgaver;
+                try {
+                    opgaver = frame.hentOpgaver();
+                } catch (IOException ioException) {
+                    JOptionPane.showMessageDialog(panel, "Der opstod en fejl under hentning af opgaver: " + ioException.getMessage());
+                    return;
+                }
 
                 if (opgave != null) {
                     // Update existing opgave
@@ -68,48 +79,30 @@ public class OpgaveManager {
                     opgaver.put(nyOpgave);
                 }
 
-                gemOpgaver(opgaver);
+                try {
+                    frame.gemOpgaver(opgaver);
+                    frame.setVeiw(new opgaveListe());
+                    JOptionPane.showMessageDialog(panel, opgave != null ? "Opgaven er opdateret!" : "Opgaven er gemt!");
+                } catch (IOException ioException) {
+                    JOptionPane.showMessageDialog(panel, "Der opstod en fejl under gemning af opgaven: " + ioException.getMessage());
+                }
 
-                JOptionPane.showMessageDialog(frame, opgave != null ? "Opgaven er opdateret!" : "Opgaven er gemt!");
-                frame.dispose();
             } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(frame, "Ugyldigt datoformat. Brug venligst DD-MM-YYYY.");
+                JOptionPane.showMessageDialog(panel, "Ugyldigt datoformat. Brug venligst DD-MM-YYYY.");
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(frame, "Ugyldigt talformat for elevtid. Indtast et heltal.");
+                JOptionPane.showMessageDialog(panel, "Ugyldigt talformat for elevtid. Indtast et heltal.");
             }
         });
 
-        frame.add(navnLabel);
-        frame.add(navnField);
-        frame.add(datoLabel);
-        frame.add(datoField);
-        frame.add(elevTidLabel);
-        frame.add(elevTidField);
-        frame.add(new JLabel()); // Empty cell
-        frame.add(saveButton);
+        panel.add(navnLabel);
+        panel.add(navnField);
+        panel.add(datoLabel);
+        panel.add(datoField);
+        panel.add(elevTidLabel);
+        panel.add(elevTidField);
+        panel.add(new JLabel()); // Empty cell
+        panel.add(saveButton);
 
-        frame.setVisible(true);
-    }
-
-    private static JSONArray hentOpgaver() {
-        try {
-            File file = new File(FILE_PATH);
-            if (!file.exists()) {
-                return new JSONArray();
-            }
-            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
-            return new JSONArray(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new JSONArray();
-        }
-    }
-
-    private static void gemOpgaver(JSONArray opgaver) {
-        try (FileWriter file = new FileWriter(FILE_PATH)) {
-            file.write(opgaver.toString(4)); // Formatted JSON with indentation
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return panel;
     }
 }

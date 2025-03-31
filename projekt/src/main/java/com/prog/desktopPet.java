@@ -89,9 +89,7 @@ public class desktopPet extends JFrame{
         frame.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent m) {
                 if (m.getClickCount() == 2) {   
-                opgaveListe oL = new opgaveListe();
-                System.err.println("mousePressed");
-                oL.frame.setVisible(true);
+                    new OpgaveFrame();
                 }
 
             }
