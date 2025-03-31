@@ -12,14 +12,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-//import org.w3c.dom.events.MouseEvent;
 
 
 
 
 public class desktopPet extends JFrame{
     private Point initialClick;
-   // private JFrame f;
    
     Container c;
     BackgroundPanel back;
