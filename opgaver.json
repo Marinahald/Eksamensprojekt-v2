@@ -6,12 +6,17 @@
     },
     {
         "elevTid": 1,
-        "dato": "01-04-2025",
+        "dato": "13-04-2025",
         "navn": "Engelsk"
     },
     {
-        "elevTid": 30,
-        "dato": "31-03-2025",
-        "navn": "fuck yeah"
+        "elevTid": 4,
+        "dato": "12-04-2025",
+        "navn": "meow"
+    },
+    {
+        "elevTid": 1,
+        "dato": "03-04-2025",
+        "navn": "biologi"
     }
 ]
