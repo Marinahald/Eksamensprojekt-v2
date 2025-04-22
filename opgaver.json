@@ -1,17 +1,5 @@
-[
-    {
-        "elevTid": 2,
-        "dato": "30-04-2025",
-        "navn": "dansk"
-    },
-    {
-        "elevTid": 1,
-        "dato": "04-04-2025",
-        "navn": "Engelsk"
-    },
-    {
-        "elevTid": 3,
-        "dato": "01-04-2025",
-        "navn": "mat"
-    }
-]
+[{
+    "elevTid": 2,
+    "dato": "30-04-2025",
+    "navn": "dansk"
+}]
