@@ -1,10 +1,9 @@
 package com.prog;
 
 import java.awt.Font;
-
 import java.io.IOException;
-import javax.swing.JButton;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,12 +12,12 @@ import javax.swing.table.DefaultTableModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class opgaveListe implements opgaverVeiw {
+public class opgaveListe implements opgaverView {
     private JSONArray opgaver; // Keep the JSON array in memory
     
     
     @Override
-    public JPanel getVeiw(OpgaveFrame frame) {
+    public JPanel getView(OpgaveFrame frame) {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
@@ -59,7 +58,7 @@ public class opgaveListe implements opgaverVeiw {
 
         // Add ActionListener to the "Tilføj opgave" button
         tilfoj.addActionListener(e -> {
-            frame.setVeiw(new OpgaveManager(null)); // Open the OpgaveManager for adding a new task
+            frame.setView(new OpgaveManager(null)); // Open the OpgaveManager for adding a new task
         });
 
         // Create and add the "Slet opgave" button
@@ -91,7 +90,7 @@ public class opgaveListe implements opgaverVeiw {
 
             JSONObject selectedOpgave = opgaver.getJSONObject(selectedRow);
             System.out.println(selectedOpgave);
-            frame.setVeiw(new OpgaveManager(selectedOpgave));
+            frame.setView(new OpgaveManager(selectedOpgave));
             
         });
         panel.add(rediger);

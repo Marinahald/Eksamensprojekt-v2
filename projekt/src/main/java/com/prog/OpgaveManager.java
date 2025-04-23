@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class OpgaveManager implements opgaverVeiw {
+public class OpgaveManager implements opgaverView {
 
     private JSONObject opgave;
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
@@ -28,7 +28,7 @@ public class OpgaveManager implements opgaverVeiw {
     }
 
     @Override
-    public JPanel getVeiw(OpgaveFrame frame) {
+    public JPanel getView(OpgaveFrame frame) {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setLayout(new GridLayout(4, 2));
@@ -78,7 +78,7 @@ public class OpgaveManager implements opgaverVeiw {
 
                 try {
                     frame.gemOpgaver(opgaver);
-                    frame.setVeiw(new opgaveListe());
+                    frame.setView(new opgaveListe());
                     JOptionPane.showMessageDialog(panel, opgave != null ? "Opgaven er opdateret!" : "Opgaven er gemt!");
                 } catch (IOException ioException) {
                     JOptionPane.showMessageDialog(panel, "Der opstod en fejl under gemning af opgaven: " + ioException.getMessage());

@@ -23,14 +23,14 @@ public class OpgaveFrame{
         frame.setSize(600, 400);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
-        setVeiw(new opgaveListe());
+        setView(new opgaveListe());
         frame.setVisible(true);
     }
 
-    // Method to set the strategy for handling tasks / what class to veiw
-    public void setVeiw(opgaverVeiw veiw) {
-        JPanel Cveiw = veiw.getVeiw(this);
-        frame.setContentPane(Cveiw);
+    // Method to set the strategy for handling tasks / what class to view
+    public void setView(opgaverView view) {
+        JPanel Cview = view.getView(this);
+        frame.setContentPane(Cview);
         frame.revalidate(); 
         frame.repaint();
     }
