@@ -73,6 +73,8 @@ public class reader {
             e.printStackTrace();
         }
 
+        
+
         //dagens dato
         String datoStr = (now.getDayOfMonth() + "-" + now.getMonthValue() + "-" + now.getYear());
         try {
@@ -99,6 +101,6 @@ public class reader {
        } else {
            return "angy";
        }
-                
+       
     }
 }

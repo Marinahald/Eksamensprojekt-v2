@@ -28,7 +28,7 @@ public class desktopPet extends JFrame{
         //Laver baggrunden usynlig
 	    setBackground(new Color(0,0,0,0));
         //Laver baggrunden uden en kat som så kan få en kat på
-        back = new BackgroundPanel(new ImageIcon("tempcat.png"));
+        back = new BackgroundPanel(new ImageIcon("gladcat.png"));
         
         back.setOpaque(false);
         setSize(260, 260);
