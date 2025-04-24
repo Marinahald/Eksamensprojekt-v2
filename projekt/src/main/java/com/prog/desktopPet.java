@@ -14,8 +14,6 @@ import javax.swing.JPanel;
 
 
 
-
-
 public class desktopPet extends JFrame{
     private Point initialClick;
    
@@ -29,7 +27,7 @@ public class desktopPet extends JFrame{
         setUndecorated(true);
         //Laver baggrunden usynlig
 	    setBackground(new Color(0,0,0,0));
-        //Tegner kat og sørger for den er usynlig
+        //Laver baggrunden uden en kat som så kan få en kat på
         back = new BackgroundPanel(new ImageIcon("tempcat.png"));
         
         back.setOpaque(false);
@@ -49,7 +47,7 @@ public class desktopPet extends JFrame{
         
     }
    
-
+    //Laver baggrunden usynlig og sætter en kat på
     public class BackgroundPanel extends JPanel{
 		ImageIcon icon;
 		
@@ -60,10 +58,10 @@ public class desktopPet extends JFrame{
 		public void setIcon(ImageIcon icon) {
 			this.icon = icon;
             System.out.println("setIcon called with: " + icon + "v2");
-            
+            //kalder paintComponent for at tegne katten
             repaint();   
 		}
-
+        ///Sørger for at katten bliver tegnet i baggrunden
         @Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
@@ -77,7 +75,7 @@ public class desktopPet extends JFrame{
 		
 	}
   
-
+    //MouseListener der tjekker hvor man klikker mm
     public static void mouseListener(JFrame frame) {
         frame.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent m) {
