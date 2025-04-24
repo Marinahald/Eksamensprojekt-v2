@@ -25,21 +25,23 @@ public class desktopPet extends JFrame{
 
     public desktopPet() {
         c = getContentPane();
+        //Fjerner bar i toppen af vinduet
         setUndecorated(true);
+        //Laver baggrunden usynlig
 	    setBackground(new Color(0,0,0,0));
-
+        //Tegner kat og sørger for den er usynlig
         back = new BackgroundPanel(new ImageIcon("tempcat.png"));
         
         back.setOpaque(false);
         setSize(260, 260);
 		setLocation(650, 350);
         
-        //mouseListener ml = new mouseListener(this);
+        //mouseListener til at trække desktopPet rundt
         mouseListener(this);
         c.add(back);
       
     }
-
+    //Vælger hvilken kat der bliver tegnet
     public void setIcon(ImageIcon imageIcon) {
         System.out.println("setIcon called with: " + imageIcon);
         back.setIcon(imageIcon);

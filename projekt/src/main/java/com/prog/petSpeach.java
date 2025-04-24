@@ -3,10 +3,6 @@ package com.prog;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
