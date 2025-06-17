@@ -13,7 +13,7 @@ public static void main(String[] args) {
         reader Reader = new reader();
         
         while (true) {
-            //pet.setIcon(new ImageIcon("gladcat.png"));
+            pet.setIcon(new ImageIcon("gladcat.png"));
             pet.setIcon(new ImageIcon(Reader.getMood()+"cat.png"));
             try {
                 Thread.sleep(1000);
