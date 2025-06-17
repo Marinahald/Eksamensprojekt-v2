@@ -64,6 +64,10 @@ public class reader {
         //henter opgaver fra fillen
         JSONArray opgaver = hentOpgaver();
         JSONObject closestOpgave = findClosestOpgave(opgaver);
+
+        if (closestOpgave == null) {
+            return "glad";
+        }
         
         //finder opgavens dato
         cl = closestOpgave.getString("dato");
